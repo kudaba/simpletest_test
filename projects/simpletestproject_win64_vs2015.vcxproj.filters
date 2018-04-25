@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\simpletest\simpletest.cpp">
+      <Filter>simpletest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\exampletests\basictests.cpp">
+      <Filter>exampletests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\exampletests\mathtests.cpp">
+      <Filter>exampletests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\exampletests\memorytests.cpp">
+      <Filter>exampletests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\simpletest\simpletest.h">
+      <Filter>simpletest</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="exampletests">
+      <UniqueIdentifier>{9de2e27f-61a6-43b0-179f-6348b7816562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="simpletest">
+      <UniqueIdentifier>{88e628f1-72ad-6168-48e6-15f9eb853d86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
