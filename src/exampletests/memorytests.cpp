@@ -2,10 +2,17 @@
 #include <memory>
 
 static size_t locAllocationCount;
+static size_t locTotalAllocations;
+
+size_t AllocationCount()
+{
+	return locAllocationCount;
+}
 
 void* operator new(size_t size)
 {
 	++locAllocationCount;
+	++locTotalAllocations;
 	return malloc(size);
 }
 
@@ -29,19 +36,21 @@ protected:
 	}
 };
 
-DEFINE_TEST_GF(TestNothing, MemoryTests, MemoryFixture)
+DEFINE_TEST_GF(TestNothing, Memory, MemoryFixture)
 {
 
 }
 
-DEFINE_TEST_GF(TestAllocation, MemoryTests, MemoryFixture)
+DEFINE_TEST_GF(TestAllocation, Memory, MemoryFixture)
 {
 	int* intptr = new int;
 	TEST_EQ(locAllocationCount, 1);
 	delete intptr;
 }
 
-DEFINE_TEST_GF(TestBasicTests, MemoryTests, MemoryFixture)
+DEFINE_TEST_GF(TestBasicTests, Memory, MemoryFixture)
 {
+	size_t allocs = locTotalAllocations;
 	TestFixture::ExecuteTestGroup("BasicTests", TestFixture::Silent);
+	TEST_EQ(allocs, locTotalAllocations);
 }

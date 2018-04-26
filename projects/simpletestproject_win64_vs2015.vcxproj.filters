@@ -7,10 +7,16 @@
     <ClCompile Include="..\src\exampletests\basictests.cpp">
       <Filter>exampletests</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\exampletests\mathtests.cpp">
+    <ClCompile Include="..\src\exampletests\exceptiontests.cpp">
+      <Filter>exampletests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\exampletests\failtests.cpp">
       <Filter>exampletests</Filter>
     </ClCompile>
     <ClCompile Include="..\src\exampletests\memorytests.cpp">
+      <Filter>exampletests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\exampletests\threadingtests.cpp">
       <Filter>exampletests</Filter>
     </ClCompile>
     <ClCompile Include="..\src\main.cpp" />

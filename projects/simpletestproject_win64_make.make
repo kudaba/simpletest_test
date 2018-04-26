@@ -62,8 +62,10 @@ endif
 ifeq ($(config),debug)
   OBJECTS += $(OBJDIR)/simpletest.o
   OBJECTS += $(OBJDIR)/basictests.o
-  OBJECTS += $(OBJDIR)/mathtests.o
+  OBJECTS += $(OBJDIR)/exceptiontests.o
+  OBJECTS += $(OBJDIR)/failtests.o
   OBJECTS += $(OBJDIR)/memorytests.o
+  OBJECTS += $(OBJDIR)/threadingtests.o
   OBJECTS += $(OBJDIR)/main.o
 
 endif
@@ -71,8 +73,10 @@ endif
 ifeq ($(config),release)
   OBJECTS += $(OBJDIR)/simpletest.o
   OBJECTS += $(OBJDIR)/basictests.o
-  OBJECTS += $(OBJDIR)/mathtests.o
+  OBJECTS += $(OBJDIR)/exceptiontests.o
+  OBJECTS += $(OBJDIR)/failtests.o
   OBJECTS += $(OBJDIR)/memorytests.o
+  OBJECTS += $(OBJDIR)/threadingtests.o
   OBJECTS += $(OBJDIR)/main.o
 
 endif
@@ -147,12 +151,22 @@ $(OBJDIR)/basictests.o: ../src/exampletests/basictests.cpp | $(OBJDIR)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 	$(SILENT) $(POSTFILECMDS)
 
-$(OBJDIR)/mathtests.o: ../src/exampletests/mathtests.cpp | $(OBJDIR)
+$(OBJDIR)/exceptiontests.o: ../src/exampletests/exceptiontests.cpp | $(OBJDIR)
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+	$(SILENT) $(POSTFILECMDS)
+
+$(OBJDIR)/failtests.o: ../src/exampletests/failtests.cpp | $(OBJDIR)
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 	$(SILENT) $(POSTFILECMDS)
 
 $(OBJDIR)/memorytests.o: ../src/exampletests/memorytests.cpp | $(OBJDIR)
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+	$(SILENT) $(POSTFILECMDS)
+
+$(OBJDIR)/threadingtests.o: ../src/exampletests/threadingtests.cpp | $(OBJDIR)
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 	$(SILENT) $(POSTFILECMDS)

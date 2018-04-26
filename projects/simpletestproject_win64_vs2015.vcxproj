@@ -91,7 +91,7 @@
       <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
       <PreprocessKeepComments>false</PreprocessKeepComments>
       <StringPooling>true</StringPooling>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
       <SmallerTypeCheck>false</SmallerTypeCheck>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -183,7 +183,7 @@
       <PreprocessKeepComments>false</PreprocessKeepComments>
       <StringPooling>true</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
-      <ExceptionHandling>false</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
       <SmallerTypeCheck>false</SmallerTypeCheck>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -256,8 +256,10 @@
   <ItemGroup>
     <ClCompile Include="..\simpletest\simpletest.cpp" />
     <ClCompile Include="..\src\exampletests\basictests.cpp" />
-    <ClCompile Include="..\src\exampletests\mathtests.cpp" />
+    <ClCompile Include="..\src\exampletests\exceptiontests.cpp" />
+    <ClCompile Include="..\src\exampletests\failtests.cpp" />
     <ClCompile Include="..\src\exampletests\memorytests.cpp" />
+    <ClCompile Include="..\src\exampletests\threadingtests.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

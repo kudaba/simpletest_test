@@ -44,6 +44,8 @@ namespace simpletest
 			conf.TargetPath = "[project.SharpmakeCsPath]" + Globals.PathToBin;
 			conf.TargetFileName = @"[conf.ProjectFileName]";
 
+			conf.Options.Add(Options.Vc.Compiler.Exceptions.Enable);
+			conf.Options.Add(Options.XCode.Compiler.Exceptions.Enable);
 		}
 	}
 

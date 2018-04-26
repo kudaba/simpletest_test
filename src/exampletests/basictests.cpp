@@ -1,4 +1,5 @@
 #include "simpletest.h"
+#include <string.h>
 
 DEFINE_TEST_G(TestBool, Basic)
 {
@@ -41,4 +42,41 @@ DEFINE_TEST_G(TestFloat, Basic)
 
 	TEST_CLOSE(10.0f, 11.0f, 2.0f);
 	TEST_CLOSE(10.0, 10.001, 0.01);
+}
+
+DEFINE_TEST_G(MaxErrors, MaxErrors)
+{
+	TestError const* lastError = nullptr;
+	while (GetLastError() != lastError)
+	{
+		lastError = GetLastError();
+
+		TEST_MESSAGE(false, "This is a really long message that is left intentionally false.");
+	}
+}
+
+DEFINE_TEST_G(TestMessageSpace, Basic)
+{
+	bool found = false;
+	for (TestFixture* i = TestFixture::GetFirstTest(); i; i = i->GetNextTest())
+	{
+		if (strcmp(i->TestName(), "MaxErrors") == 0 && strcmp(i->TestGroup(), "MaxErrors") == 0)
+		{
+			i->ExecuteTest();
+
+			int errorCount = 0;
+			for (TestError const* err = i->GetFirstError(); err != i->GetLastError(); err = err->next)
+			{
+				++errorCount;
+			}
+
+			TEST_EQ(i->NumErrors(), i->NumTests());
+			TEST_EQ(i->NumErrors(), errorCount + 1);
+
+			found = true;
+			break;
+		}
+	}
+
+	TEST(found);
 }
