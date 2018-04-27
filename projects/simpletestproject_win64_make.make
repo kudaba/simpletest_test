@@ -8,17 +8,17 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug)
-  CXX        = g++
+  CXX        = clang++
   AR         = ar
   OBJDIR     = ../.temp/build/simpletestproject_win64_make
   TARGETDIR  = ../.temp/bin
   TARGET     = $(TARGETDIR)/simpletestproject_win64_make.exe
-  DEFINES   += 
+  DEFINES   += -D__STDC_LIB_EXT1__=1
   INCLUDES  += -I../simpletest
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) -g -Wall 
-  CXXFLAGS  += $(CFLAGS) -fno-exceptions -fno-rtti 
-  LDFLAGS   += 
+  CFLAGS    += $(CPPFLAGS) -std=c++11 -g -Wall -Werror -pthread
+  CXXFLAGS  += $(CFLAGS) -fexceptions -fno-rtti 
+  LDFLAGS   += -pthread
   LIBS      +=  
   RESFLAGS  += $(DEFINES) $(INCLUDES)
   LDDEPS    += 
@@ -34,17 +34,17 @@ ifeq ($(config),debug)
 endif
 
 ifeq ($(config),release)
-  CXX        = g++
+  CXX        = clang++
   AR         = ar
   OBJDIR     = ../.temp/build/simpletestproject_win64_make
   TARGETDIR  = ../.temp/bin
   TARGET     = $(TARGETDIR)/simpletestproject_win64_make.exe
-  DEFINES   += 
+  DEFINES   += -D__STDC_LIB_EXT1__=1
   INCLUDES  += -I../simpletest
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
-  CFLAGS    += $(CPPFLAGS) -g -O3 -Wall 
-  CXXFLAGS  += $(CFLAGS) -fno-exceptions -fno-rtti 
-  LDFLAGS   += 
+  CFLAGS    += $(CPPFLAGS) -std=c++11 -g -O3 -Wall -Werror -pthread
+  CXXFLAGS  += $(CFLAGS) -fexceptions -fno-rtti 
+  LDFLAGS   += -pthread
   LIBS      +=  
   RESFLAGS  += $(DEFINES) $(INCLUDES)
   LDDEPS    += 
@@ -66,6 +66,7 @@ ifeq ($(config),debug)
   OBJECTS += $(OBJDIR)/failtests.o
   OBJECTS += $(OBJDIR)/memorytests.o
   OBJECTS += $(OBJDIR)/threadingtests.o
+  OBJECTS += $(OBJDIR)/typetostringtests.o
   OBJECTS += $(OBJDIR)/main.o
 
 endif
@@ -77,6 +78,7 @@ ifeq ($(config),release)
   OBJECTS += $(OBJDIR)/failtests.o
   OBJECTS += $(OBJDIR)/memorytests.o
   OBJECTS += $(OBJDIR)/threadingtests.o
+  OBJECTS += $(OBJDIR)/typetostringtests.o
   OBJECTS += $(OBJDIR)/main.o
 
 endif
@@ -167,6 +169,11 @@ $(OBJDIR)/memorytests.o: ../src/exampletests/memorytests.cpp | $(OBJDIR)
 	$(SILENT) $(POSTFILECMDS)
 
 $(OBJDIR)/threadingtests.o: ../src/exampletests/threadingtests.cpp | $(OBJDIR)
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+	$(SILENT) $(POSTFILECMDS)
+
+$(OBJDIR)/typetostringtests.o: ../src/exampletests/typetostringtests.cpp | $(OBJDIR)
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 	$(SILENT) $(POSTFILECMDS)

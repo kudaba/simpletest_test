@@ -4,7 +4,7 @@ This repo functions as both the unit tests for simple tests and shows examples o
 
 ## Compiling simpletest_test
 
-Hopefully the last person to make changes has left the sample projects in place. So you should be able to just open the appropriate one and hit compile. As of this writing simpletest has only been tested on windows using Visual Studio 2017.
+Hopefully the last person to make changes has left the sample projects in place. So you should be able to just open the appropriate one and hit compile. As of this writing simpletest has only been tested on windows using Visual Studio 2017 and clang (linux cpp11).
 
 ## Generating Projects
 

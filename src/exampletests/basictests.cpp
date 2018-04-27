@@ -30,9 +30,9 @@ void TestNum()
 DEFINE_TEST_G(TestInt, Basic)
 {
 	TestNum<int>();
-	TestNum<__int64>();
-	TestNum<unsigned int>();
-	TestNum<unsigned __int64>();
+	TestNum<int64>();
+	TestNum<uint>();
+	TestNum<uint64>();
 }
 
 DEFINE_TEST_G(TestFloat, Basic)

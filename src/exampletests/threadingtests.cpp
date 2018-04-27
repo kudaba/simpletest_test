@@ -19,7 +19,7 @@ private:
 	std::thread myThread;
 };
 
-static int locThreadIndex = 0;
+static volatile int locThreadIndex = 0;
 
 DEFINE_TEST_GF(WaitFor1, Threading, ThreadingFixture)
 {
@@ -47,7 +47,7 @@ DEFINE_TEST(ThreadingTest)
 
 	for (auto i = TestFixture::GetFirstTest(); i; i = i->GetNextTest())
 	{
-		if (_stricmp("Threading", i->TestGroup()) == 0)
+		if (strcmp("Threading", i->TestGroup()) == 0)
 		{
 			ThreadingFixture* threadf = (ThreadingFixture*)i;
 			threadf->StartThread();
@@ -56,7 +56,7 @@ DEFINE_TEST(ThreadingTest)
 
 	for (auto i = TestFixture::GetFirstTest(); i; i = i->GetNextTest())
 	{
-		if (_stricmp("Threading", i->TestGroup()) == 0)
+		if (strcmp("Threading", i->TestGroup()) == 0)
 		{
 			ThreadingFixture* threadf = (ThreadingFixture*)i;
 			threadf->Wait();

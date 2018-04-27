@@ -19,6 +19,9 @@
     <ClCompile Include="..\src\exampletests\threadingtests.cpp">
       <Filter>exampletests</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\exampletests\typetostringtests.cpp">
+      <Filter>exampletests</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>

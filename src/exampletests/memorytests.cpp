@@ -1,22 +1,22 @@
 #include "simpletest.h"
 #include <memory>
 
-static size_t locAllocationCount;
-static size_t locTotalAllocations;
+static uint64 locAllocationCount;
+static uint64 locTotalAllocations;
 
 size_t AllocationCount()
 {
 	return locAllocationCount;
 }
 
-void* operator new(size_t size)
+void* operator new(size_t size) throw(std::bad_alloc)
 {
 	++locAllocationCount;
 	++locTotalAllocations;
 	return malloc(size);
 }
 
-void operator delete(void* data)
+void operator delete(void* data) noexcept
 {
 	--locAllocationCount;
 	free(data);
@@ -50,7 +50,7 @@ DEFINE_TEST_GF(TestAllocation, Memory, MemoryFixture)
 
 DEFINE_TEST_GF(TestBasicTests, Memory, MemoryFixture)
 {
-	size_t allocs = locTotalAllocations;
+	uint64 allocs = locTotalAllocations;
 	TestFixture::ExecuteTestGroup("BasicTests", TestFixture::Silent);
 	TEST_EQ(allocs, locTotalAllocations);
 }

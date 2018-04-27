@@ -64,17 +64,17 @@ DEFINE_TEST(ExceptionTests)
 {
 	for (auto i = TestFixture::GetFirstTest(); i; i = i->GetNextTest())
 	{
-		if (_stricmp("Exceptions", i->TestGroup()) == 0)
+		if (strcmp("Exceptions", i->TestGroup()) == 0)
 		{
 			TEST(!i->ExecuteTest());
 			TEST_EQ(i->NumTests(), 1);
 			TEST_EQ(i->NumErrors(), 1);
 
-			if (i == &ExceptionSetupInstance)
+			if (i == &ExceptionsExceptionSetupInstance)
 				TEST(strstr(i->GetFirstError()->message, "Setup") != nullptr);
-			else if (i == &ExceptionTearDownInstance)
+			else if (i == &ExceptionsExceptionTearDownInstance)
 				TEST(strstr(i->GetFirstError()->message, "TearDown") != nullptr);
-			else if (i == &ExceptionStringInstance)
+			else if (i == &ExceptionsExceptionStringInstance)
 				TEST(strstr(i->GetFirstError()->message, "Function") != nullptr);
 			else
 				TEST(strstr(i->GetFirstError()->message, "Unknown") != nullptr);

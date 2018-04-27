@@ -1,20 +1,46 @@
 #include "simpletest.h"
 #include <stdio.h>
+#include <string.h>
 
 extern size_t AllocationCount();
 
-int main()
+char const* groups[] =
 {
-	bool pass = true;
-	pass &= TestFixture::ExecuteTestGroup("Basic", TestFixture::Verbose);
-	pass &= TestFixture::ExecuteTestGroup("Memory", TestFixture::Verbose);
-	pass &= TestFixture::ExecuteTestGroup("Global", TestFixture::Verbose);
+	"Basic",
+	"Memory",
+	"Global",
+	"Finale",
+	"LeakTest"
+};
 
-	if (AllocationCount() != 0)
+DEFINE_TEST_G(FinalTest, Finale)
+{
+	for (auto group : groups)
 	{
-		printf("Memory leak detected!!!!");
-		pass = false;
+		if (strcmp(group, "Finale") == 0)
+			return;
+
+		for (auto test = GetFirstTest(); test; test = test->GetNextTest())
+		{
+			if (strcmp(test->TestGroup(), group) == 0)
+			{
+				TEST_NEQ(test->NumTests(), 0);
+			}
+		}
 	}
+}
+
+DEFINE_TEST_G(LeakTest, LeakTest)
+{
+	TEST_MESSAGE(AllocationCount() == 0, "Memory leak detected!!!!");
+}
+
+int main()
+{	
+	bool pass = true;
+
+	for (auto group : groups)
+		pass &= TestFixture::ExecuteTestGroup(group, TestFixture::Verbose);
 
 	return pass ? 0 : 1;
 }

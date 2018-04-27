@@ -30,9 +30,9 @@ void TestFailNum()
 DEFINE_TEST_G(TestInt, Fail)
 {
 	TestFailNum<int>();
-	TestFailNum<__int64>();
-	TestFailNum<unsigned int>();
-	TestFailNum<unsigned __int64>();
+	TestFailNum<int64>();
+	TestFailNum<uint>();
+	TestFailNum<uint64>();
 }
 
 DEFINE_TEST_G(TestFloat, Fail)
@@ -48,7 +48,7 @@ DEFINE_TEST(FullFailTest)
 {
 	for (auto i = TestFixture::GetFirstTest(); i; i = i->GetNextTest())
 	{
-		if (_stricmp("Fail", i->TestGroup()) == 0)
+		if (strcmp("Fail", i->TestGroup()) == 0)
 		{
 			TEST(!i->ExecuteTest());
 			TEST_EQ(i->NumTests(), i->NumErrors());

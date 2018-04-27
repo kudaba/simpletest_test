@@ -44,8 +44,38 @@ namespace simpletest
 			conf.TargetPath = "[project.SharpmakeCsPath]" + Globals.PathToBin;
 			conf.TargetFileName = @"[conf.ProjectFileName]";
 
-			conf.Options.Add(Options.Vc.Compiler.Exceptions.Enable);
 			conf.Options.Add(Options.XCode.Compiler.Exceptions.Enable);
+		}
+
+		[Configure(DevEnv.VisualStudio)]
+		public void ConfigureVS(Configuration conf, Target target)
+		{
+			conf.Options.Add(Options.Vc.Compiler.Exceptions.Enable);
+			conf.Options.Add(Options.Vc.General.WarningLevel.Level4);
+			conf.Options.Add(Options.Vc.General.TreatWarningsAsErrors.Enable);
+			conf.Options.Add(new Options.Vc.Compiler.DisableSpecificWarnings("4290"));
+
+			conf.Defines.Add("_CRT_SECURE_NO_WARNINGS");
+			conf.Defines.Add("_CRT_NONSTDC_NO_DEPRECATE");
+		}
+
+		[Configure(DevEnv.make)]
+		public void ConfigureMake(Configuration conf, Target target)
+		{
+			conf.Options.Add(Options.Makefile.Compiler.Exceptions.Enable);
+			conf.Options.Add(Options.Makefile.Compiler.Warnings.MoreWarnings);
+			conf.Options.Add(Options.Makefile.Compiler.TreatWarningsAsErrors.Enable);
+
+			conf.Options.Add(Options.Makefile.General.PlatformToolset.Clang);
+			conf.Options.Add(Options.Makefile.Compiler.CppLanguageStandard.Cpp11);
+			conf.AdditionalCompilerOptions.Add("-pthread");
+			conf.AdditionalLinkerOptions.Add("-pthread");
+
+			conf.Defines.Add("__STDC_LIB_EXT1__=1");
+			/*conf.Defines.Add("strcpy_s=strcpy");
+			conf.Defines.Add("sprintf_s=sprintf");
+			conf.Defines.Add("vsnprintf_s=vsnprintf");
+			conf.Defines.Add("_strcmp=_strcmp");*/
 		}
 	}
 
