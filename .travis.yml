@@ -1,0 +1,12 @@
+language: cpp
+
+compiler:
+#  - gcc
+  - clang
+
+env:
+  - CONFIGURATION=debug
+#  - CONFIGURATION=release
+
+script:
+  - cd projects && make -f simpletestsolution_win64_make.make all config=$CONFIGURATION

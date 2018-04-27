@@ -1,5 +1,7 @@
 # simpletest_test
 
+[![Build Status](https://travis-ci.org/kudaba/simpletest_test.svg?branch=master)](https://travis-ci.org/kudaba/simpletest_test)
+
 This repo functions as both the unit tests for simple tests and shows examples of different ways it can be customized to your needs. To add simpletest to your project you use the [simpletest](https://github.com/kudaba/simpletest) repo as a submodule and it only contains the minimum amount of files. I hope to eventually add a nuget package as well.
 
 ## Compiling simpletest_test
