@@ -65,6 +65,53 @@ DEFINE_TEST(StringTypeToString)
 	TEST_MESSAGE(strcmp(*string, "(nullptr)") == 0, "%s != %s", *string, "(nullptr)");
 }
 
+template<typename T>
+void TestTypeToString(T value, char const* expected)
+{
+	TempString string = TypeToString(value);
+	TEST_MESSAGE(strcmp(*string, expected) == 0, "%s != %s", *string, expected);
+}
+
+template<typename T>
+void TestUIntValueType()
+{
+	TestTypeToString<T>(10, "10");
+	TestTypeToString<T>(999, "999");
+}
+
+template<typename T>
+void TestSIntValueType()
+{
+	TestTypeToString<T>(-10, "-10");
+	TestTypeToString<T>(-999, "-999");
+
+	TestUIntValueType<T>();
+}
+
+template<typename T>
+void TestFloatValueType()
+{
+	TestTypeToString<T>(T(500.0), "500");
+	TestTypeToString<T>(T(10.5), "10.5");
+	TestTypeToString<T>(T(0.000001), "0.000001");
+	TestTypeToString<T>(T(-500.0), "-500");
+	TestTypeToString<T>(T(-10.5), "-10.5");
+	TestTypeToString<T>(T(-0.000001), "-0.000001");
+}
+
+DEFINE_TEST(CommonTypeToString)
+{
+	TestSIntValueType<int>();
+	TestUIntValueType<uint>();
+	TestSIntValueType<int64>();
+	TestUIntValueType<uint64>();
+	TestFloatValueType<float>();
+	TestFloatValueType<double>();
+
+	TestTypeToString(false, "false");
+	TestTypeToString(true, "true");
+}
+
 DEFINE_TEST(TypeToString)
 {
 	bool found = false;
