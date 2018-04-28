@@ -1,0 +1,28 @@
+version: 1.0.{build}
+branches:
+  only:
+    - master
+
+image: Visual Studio 2017
+
+clone_folder: c:\projects\simpletest_test
+
+platform: x64
+configuration:
+  - Debug
+  - Release
+
+environment:
+  matrix:
+    - devenv: vs2015
+    - devenv: vs2017
+
+install:
+  - git submodule update --init --recursive
+
+build_script:
+  - cd projects
+  - msbuild simpletestsolution_win64_%devenv%.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+after_build:
+  c:\projects\simpletest_test\.temp\bin\simpletestproject_win64_%devenv%_%configuration%.exe
