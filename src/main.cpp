@@ -32,7 +32,7 @@ DEFINE_TEST_G(FinalTest, Finale)
 
 DEFINE_TEST_G(LeakTest, LeakTest)
 {
-	TEST_MESSAGE(AllocationCount() == 0, "Memory leak detected!!!!");
+	TEST_MESSAGE(AllocationCount() == 0, "(%d) Memory leaks detected!!!!", AllocationCount());
 }
 
 int main()

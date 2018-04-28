@@ -1,8 +1,9 @@
 #include "simpletest.h"
 #include <memory>
+#include <atomic>
 
-static uint64 locAllocationCount;
-static uint64 locTotalAllocations;
+static std::atomic<uint64> locAllocationCount;
+static std::atomic<uint64> locTotalAllocations;
 
 size_t AllocationCount()
 {
