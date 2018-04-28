@@ -1,23 +1,30 @@
 language: cpp
 
-compiler:
-  - gcc
-  - clang
-
 matrix:
   include:
     - os: linux
       compiler: gcc
-      env: COMPILER=gcc
+      env:
+        - COMPILER=gcc
+        - CONFIGURATION=debug
+
+    - os: linux
+      compiler: gcc
+      env:
+        - COMPILER=gcc
+        - CONFIGURATION=release
 
     - os: linux
       compiler: clang
-      env: COMPILER=clang
-
-env:
-  - CONFIGURATION=debug
-  - CONFIGURATION=release
+      env:
+        - COMPILER=clang
+        - CONFIGURATION=debug
+      
+    - os: linux
+      compiler: clang
+      env:
+        - COMPILER=clang
+        - CONFIGURATION=release
 
 script:
-  - cd projects && make -f simpletestsolution_linux_$COMPILER.make config=$CONFIGURATION
-  - ./.temp/bin/simpletestsolution_linux_$COMPILER_$CONFIGURATION
+  - ./build_and_run.sh $COMPILER $CONFIGURATION
