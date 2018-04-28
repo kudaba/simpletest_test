@@ -15,10 +15,10 @@ all: $(PROJECTS)
 
 SimpleTestProject: 
 	@echo " ==== Building SimpleTestProject ($(config)) ===="
-	@${MAKE} --no-print-directory -C . -f simpletestproject_win64_make.make
+	@${MAKE} --no-print-directory -C . -f simpletestproject_linux_clang.make
 
 clean:
-	@${MAKE} --no-print-directory -C . -f simpletestproject_win64_make.make clean
+	@${MAKE} --no-print-directory -C . -f simpletestproject_linux_clang.make clean
 
 help:
 	@echo "Usage: make [config = name] [target]"

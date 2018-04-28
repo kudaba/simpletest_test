@@ -1,7 +1,30 @@
 using Sharpmake;
+using System;
 
 namespace simpletest
 {
+	[Fragment, Flags]
+	public enum Toolset
+	{
+		Gcc = 1,
+		Clang = 2
+	}
+
+	public class CrossTarget : Target
+	{
+		public CrossTarget()
+		{
+
+		}
+		public CrossTarget(Platform platform, DevEnv devEnv, Optimization optim, Toolset tools = Toolset.Gcc)
+			: base(platform, devEnv, optim)
+		{
+			Toolset = tools;
+		}
+
+		public Toolset Toolset;
+	}
+
 	public static class Globals
 	{
 		public const string PathToRoot = @"\..";
@@ -14,18 +37,22 @@ namespace simpletest
 		public const string PathToBin = PathToTmp + @"\bin";
 		public const string PathToGen = PathToRoot + @"\projects";
 
-		public static readonly ITarget[] DefaultTargets = new ITarget[]
+		public static readonly CrossTarget[] DefaultTargets = new CrossTarget[]
 		{
-			new Target(Platform.win64,
-				DevEnv.vs2015 | DevEnv.vs2017 | DevEnv.make,
-				Optimization.Debug | Optimization.Release)
+			new CrossTarget(Platform.win64,
+				DevEnv.vs2015 | DevEnv.vs2017,
+				Optimization.Debug | Optimization.Release),
+			new CrossTarget(Platform.linux,
+				DevEnv.make,
+				Optimization.Debug | Optimization.Release,
+				Toolset.Gcc | Toolset.Clang),
 		};
 	}
 
 	[Generate]
 	public class SimpleTestProject : Project
 	{
-		public SimpleTestProject()
+		public SimpleTestProject() : base(typeof(CrossTarget))
 		{
 			AddTargets(Globals.DefaultTargets);
 			SourceRootPath = "[project.SharpmakeCsPath]" + Globals.PathToSrc;
@@ -33,22 +60,22 @@ namespace simpletest
 		}
 
 		[Configure]
-		public void ConfigureAll(Configuration conf, Target target)
+		public void ConfigureAll(Configuration conf, CrossTarget target)
 		{
 			conf.ProjectPath = "[project.SharpmakeCsPath]" + Globals.PathToGen;
 			conf.ProjectFileName = "[project.Name]_[target.Platform]_[target.DevEnv]";
 
 			conf.IncludePaths.Add("[project.SharpmakeCsPath]" + Globals.PathToSimpleTest);
 
-			conf.IntermediatePath = "[project.SharpmakeCsPath]" + Globals.PathToBuild + @"\[conf.ProjectFileName]";
+			conf.IntermediatePath = "[project.SharpmakeCsPath]" + Globals.PathToBuild + @"\[target.Optimization]\[conf.ProjectFileName]";
 			conf.TargetPath = "[project.SharpmakeCsPath]" + Globals.PathToBin;
-			conf.TargetFileName = @"[conf.ProjectFileName]";
+			conf.TargetFileName = @"[conf.ProjectFileName]_[target.Optimization]";
 
 			conf.Options.Add(Options.XCode.Compiler.Exceptions.Enable);
 		}
 
 		[Configure(DevEnv.VisualStudio)]
-		public void ConfigureVS(Configuration conf, Target target)
+		public void ConfigureVS(Configuration conf, CrossTarget target)
 		{
 			conf.Options.Add(Options.Vc.Compiler.Exceptions.Enable);
 			conf.Options.Add(Options.Vc.General.WarningLevel.Level4);
@@ -60,13 +87,19 @@ namespace simpletest
 		}
 
 		[Configure(DevEnv.make)]
-		public void ConfigureMake(Configuration conf, Target target)
+		public void ConfigureMake(Configuration conf, CrossTarget target)
 		{
+			conf.ProjectFileName = "[project.Name]_[target.Platform]_[target.Toolset]";
+
 			conf.Options.Add(Options.Makefile.Compiler.Exceptions.Enable);
 			conf.Options.Add(Options.Makefile.Compiler.Warnings.MoreWarnings);
 			conf.Options.Add(Options.Makefile.Compiler.TreatWarningsAsErrors.Enable);
 
-			conf.Options.Add(Options.Makefile.General.PlatformToolset.Clang);
+			if (target.Toolset == Toolset.Gcc)
+				conf.Options.Add(Options.Makefile.General.PlatformToolset.Gcc);
+			else
+				conf.Options.Add(Options.Makefile.General.PlatformToolset.Clang);
+
 			conf.Options.Add(Options.Makefile.Compiler.CppLanguageStandard.Cpp11);
 			conf.AdditionalCompilerOptions.Add("-pthread");
 			conf.AdditionalLinkerOptions.Add("-pthread");
@@ -82,7 +115,7 @@ namespace simpletest
 	[Generate]
 	public class SimpleTestSolution : Solution
 	{
-		public SimpleTestSolution()
+		public SimpleTestSolution() : base(typeof(CrossTarget))
 		{
 			AddTargets(Globals.DefaultTargets);
 		}
@@ -95,7 +128,14 @@ namespace simpletest
 
 			conf.AddProject<SimpleTestProject>(target);
 		}
+
+		[Configure(DevEnv.make)]
+		public void ConfigureMake(Configuration conf, CrossTarget target)
+		{
+			conf.SolutionFileName = "[solution.Name]_[target.Platform]_[target.Toolset]";
+		}
 	}
+
 	public static class Main
 	{
 		[Sharpmake.Main]

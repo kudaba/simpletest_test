@@ -42,29 +42,29 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>simpletestproject_win64_vs2015</TargetName>
+    <TargetName>simpletestproject_win64_vs2015_debug</TargetName>
     <OutDir>..\.temp\bin\</OutDir>
-    <IntDir>..\.temp\build\simpletestproject_win64_vs2015\</IntDir>
+    <IntDir>..\.temp\build\debug\simpletestproject_win64_vs2015\</IntDir>
     <TargetExt>.exe</TargetExt>
     <GenerateManifest>true</GenerateManifest>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
     <PreLinkEventUseInBuild>true</PreLinkEventUseInBuild>
     <LinkIncremental>false</LinkIncremental>
-    <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015.exe</OutputFile>
+    <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015_debug.exe</OutputFile>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>simpletestproject_win64_vs2015</TargetName>
+    <TargetName>simpletestproject_win64_vs2015_release</TargetName>
     <OutDir>..\.temp\bin\</OutDir>
-    <IntDir>..\.temp\build\simpletestproject_win64_vs2015\</IntDir>
+    <IntDir>..\.temp\build\release\simpletestproject_win64_vs2015\</IntDir>
     <TargetExt>.exe</TargetExt>
     <GenerateManifest>true</GenerateManifest>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
     <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
     <PreLinkEventUseInBuild>true</PreLinkEventUseInBuild>
     <LinkIncremental>false</LinkIncremental>
-    <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015.exe</OutputFile>
+    <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015_release.exe</OutputFile>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,16 +118,16 @@
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <AdditionalOptions></AdditionalOptions>
-      <ProgramDatabaseFileName>..\.temp\build\simpletestproject_win64_vs2015\simpletestproject_win64_vs2015_compiler.pdb</ProgramDatabaseFileName>
+      <ProgramDatabaseFileName>..\.temp\build\debug\simpletestproject_win64_vs2015\simpletestproject_win64_vs2015_debug_compiler.pdb</ProgramDatabaseFileName>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015.exe</OutputFile>
+      <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015_debug.exe</OutputFile>
       <ShowProgress>NotSet</ShowProgress>
-      <ProgramDatabaseFile>..\.temp\bin\simpletestproject_win64_vs2015.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>..\.temp\bin\simpletestproject_win64_vs2015_debug.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
       <MapExports>false</MapExports>
       <SwapRunFromCD>false</SwapRunFromCD>
@@ -154,7 +154,7 @@
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <LargeAddressAware>true</LargeAddressAware>
-      <MapFileName>..\.temp\bin\simpletestproject_win64_vs2015.map</MapFileName>
+      <MapFileName>..\.temp\bin\simpletestproject_win64_vs2015_debug.map</MapFileName>
       <BaseAddress></BaseAddress>
     </Link>
   </ItemDefinitionGroup>
@@ -210,16 +210,16 @@
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <AdditionalOptions></AdditionalOptions>
-      <ProgramDatabaseFileName>..\.temp\build\simpletestproject_win64_vs2015\simpletestproject_win64_vs2015_compiler.pdb</ProgramDatabaseFileName>
+      <ProgramDatabaseFileName>..\.temp\build\release\simpletestproject_win64_vs2015\simpletestproject_win64_vs2015_release_compiler.pdb</ProgramDatabaseFileName>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015.exe</OutputFile>
+      <OutputFile>..\.temp\bin\simpletestproject_win64_vs2015_release.exe</OutputFile>
       <ShowProgress>NotSet</ShowProgress>
-      <ProgramDatabaseFile>..\.temp\bin\simpletestproject_win64_vs2015.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>..\.temp\bin\simpletestproject_win64_vs2015_release.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
       <MapExports>false</MapExports>
       <SwapRunFromCD>false</SwapRunFromCD>
@@ -246,7 +246,7 @@
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
       <LargeAddressAware>true</LargeAddressAware>
-      <MapFileName>..\.temp\bin\simpletestproject_win64_vs2015.map</MapFileName>
+      <MapFileName>..\.temp\bin\simpletestproject_win64_vs2015_release.map</MapFileName>
       <BaseAddress></BaseAddress>
     </Link>
   </ItemDefinitionGroup>

@@ -1,12 +1,23 @@
 language: cpp
 
 compiler:
-#  - gcc
+  - gcc
   - clang
+
+matrix:
+  include:
+    - os: linux
+      compiler: gcc
+      env: COMPILER=gcc
+
+    - os: linux
+      compiler: clang
+      env: COMPILER=clang
 
 env:
   - CONFIGURATION=debug
-#  - CONFIGURATION=release
+  - CONFIGURATION=release
 
 script:
-  - cd projects && make -f simpletestsolution_win64_make.make all config=$CONFIGURATION
+  - cd projects && make -f simpletestsolution_linux_$COMPILER.make config=$CONFIGURATION
+  - ./.temp/bin/simpletestsolution_linux_$COMPILER_$CONFIGURATION

@@ -10,9 +10,9 @@ endif
 ifeq ($(config),debug)
   CXX        = clang++
   AR         = ar
-  OBJDIR     = ../.temp/build/simpletestproject_win64_make
+  OBJDIR     = ../.temp/build/debug/simpletestproject_linux_clang
   TARGETDIR  = ../.temp/bin
-  TARGET     = $(TARGETDIR)/simpletestproject_win64_make.exe
+  TARGET     = $(TARGETDIR)/simpletestproject_linux_clang_debug
   DEFINES   += -D__STDC_LIB_EXT1__=1
   INCLUDES  += -I../simpletest
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
@@ -36,9 +36,9 @@ endif
 ifeq ($(config),release)
   CXX        = clang++
   AR         = ar
-  OBJDIR     = ../.temp/build/simpletestproject_win64_make
+  OBJDIR     = ../.temp/build/release/simpletestproject_linux_clang
   TARGETDIR  = ../.temp/bin
-  TARGET     = $(TARGETDIR)/simpletestproject_win64_make.exe
+  TARGET     = $(TARGETDIR)/simpletestproject_linux_clang_release
   DEFINES   += -D__STDC_LIB_EXT1__=1
   INCLUDES  += -I../simpletest
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
