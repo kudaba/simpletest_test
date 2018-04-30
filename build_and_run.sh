@@ -2,6 +2,7 @@
 
 toolset=${1}
 config=${2}
+extra=${3}
 
 if [ "$toolset" = "" ]; then
     toolset=gcc
@@ -11,6 +12,10 @@ if [ "$config" = "" ]; then
 fi
 
 pushd projects
-make -f simpletestsolution_linux_${toolset}.make config=${config}
+make -f simpletestsolution_linux_${toolset}.make config=${config} ${extra}
 popd
-./.temp/bin/simpletestproject_linux_${toolset}_${config}
+
+if [ "$extra" != "clean" ]; then
+    ./.temp/bin/simpletestproject_linux_${toolset}_${config}
+fi
+

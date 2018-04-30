@@ -80,7 +80,7 @@ namespace simpletest
 			conf.Options.Add(Options.Vc.Compiler.Exceptions.Enable);
 			conf.Options.Add(Options.Vc.General.WarningLevel.Level4);
 			conf.Options.Add(Options.Vc.General.TreatWarningsAsErrors.Enable);
-			conf.Options.Add(new Options.Vc.Compiler.DisableSpecificWarnings("4290"));
+			conf.Options.Add(new Options.Vc.Compiler.DisableSpecificWarnings("4290")); // C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 
 			conf.Defines.Add("_CRT_SECURE_NO_WARNINGS");
 			conf.Defines.Add("_CRT_NONSTDC_NO_DEPRECATE");
@@ -103,12 +103,6 @@ namespace simpletest
 			conf.Options.Add(Options.Makefile.Compiler.CppLanguageStandard.Cpp11);
 			conf.AdditionalCompilerOptions.Add("-pthread");
 			conf.AdditionalLinkerOptions.Add("-pthread");
-
-			conf.Defines.Add("__STDC_LIB_EXT1__=1");
-			/*conf.Defines.Add("strcpy_s=strcpy");
-			conf.Defines.Add("sprintf_s=sprintf");
-			conf.Defines.Add("vsnprintf_s=vsnprintf");
-			conf.Defines.Add("_strcmp=_strcmp");*/
 		}
 	}
 

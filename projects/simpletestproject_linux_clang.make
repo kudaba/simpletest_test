@@ -13,7 +13,7 @@ ifeq ($(config),debug)
   OBJDIR     = ../.temp/build/debug/simpletestproject_linux_clang
   TARGETDIR  = ../.temp/bin
   TARGET     = $(TARGETDIR)/simpletestproject_linux_clang_debug
-  DEFINES   += -D__STDC_LIB_EXT1__=1
+  DEFINES   += 
   INCLUDES  += -I../simpletest
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) -std=c++11 -g -Wall -Werror -pthread
@@ -39,7 +39,7 @@ ifeq ($(config),release)
   OBJDIR     = ../.temp/build/release/simpletestproject_linux_clang
   TARGETDIR  = ../.temp/bin
   TARGET     = $(TARGETDIR)/simpletestproject_linux_clang_release
-  DEFINES   += -D__STDC_LIB_EXT1__=1
+  DEFINES   += 
   INCLUDES  += -I../simpletest
   CPPFLAGS  += -MMD -MP $(DEFINES) $(INCLUDES)
   CFLAGS    += $(CPPFLAGS) -std=c++11 -g -O3 -Wall -Werror -pthread
