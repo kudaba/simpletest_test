@@ -7,7 +7,7 @@ DEFINE_TEST_G(TestBool, Fail)
 	bool lie = false;
 	TEST(!truth);
 	TEST(lie);
-	TEST_MESSAGE(!!lie, "Not not lie is truth");
+	TEST_MESSAGE(!!lie, "Not not lie is truth %c %i %s", 'l', 55, "check");
 }
 
 template<typename numtype>
