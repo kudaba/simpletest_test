@@ -61,8 +61,16 @@ DEFINE_TEST(StringTypeToString)
 	TempString string = TypeToString("customtestfrompointer");
 	TEST_MESSAGE(strcmp(*string, "customtestfrompointer") == 0, "%s != %s", *string, "customtestfrompointer");
 
-	string = TypeToString(nullptr);
+	void* null = nullptr;
+	string = TypeToString(null);
 	TEST_MESSAGE(strcmp(*string, "(nullptr)") == 0, "%s != %s", *string, "(nullptr)");
+
+	int value = 5;
+	string = TypeToString(&value);
+	TEST_MESSAGE(strcmp(*string, "5") == 0, "%s != %s", *string, "5");
+
+	string = TypeToString(&string);
+	TEST_MESSAGE(strcmp(*string, "(unknown type)") == 0, "%s != %s", *string, "(unknown type)");
 }
 
 template<typename T>
