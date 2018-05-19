@@ -7,7 +7,8 @@ namespace simpletest
 	public enum Toolset
 	{
 		Gcc = 1,
-		Clang = 2
+		Clang = 2,
+		GCov = 4
 	}
 
 	public class CrossTarget : Target
@@ -45,7 +46,7 @@ namespace simpletest
 			new CrossTarget(Platform.linux,
 				DevEnv.make,
 				Optimization.Debug | Optimization.Release,
-				Toolset.Gcc | Toolset.Clang),
+				Toolset.Gcc | Toolset.Clang | Toolset.GCov),
 		};
 	}
 
@@ -95,14 +96,22 @@ namespace simpletest
 			conf.Options.Add(Options.Makefile.Compiler.Warnings.MoreWarnings);
 			conf.Options.Add(Options.Makefile.Compiler.TreatWarningsAsErrors.Enable);
 
-			if (target.Toolset == Toolset.Gcc)
-				conf.Options.Add(Options.Makefile.General.PlatformToolset.Gcc);
-			else
+			if (target.Toolset == Toolset.Clang)
 				conf.Options.Add(Options.Makefile.General.PlatformToolset.Clang);
+			else
+				conf.Options.Add(Options.Makefile.General.PlatformToolset.Gcc);
 
 			conf.Options.Add(Options.Makefile.Compiler.CppLanguageStandard.Cpp11);
 			conf.AdditionalCompilerOptions.Add("-pthread");
 			conf.AdditionalLinkerOptions.Add("-pthread");
+
+			if (target.Toolset == Toolset.GCov)
+			{
+				conf.AdditionalCompilerOptions.Add("-fprofile-arcs");
+				conf.AdditionalCompilerOptions.Add("-ftest-coverage");
+				conf.AdditionalLinkerOptions.Add("-fprofile-arcs");
+				conf.AdditionalLinkerOptions.Add("-ftest-coverage");
+			}
 		}
 	}
 

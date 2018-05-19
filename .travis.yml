@@ -1,30 +1,44 @@
 language: cpp
+os: linux
 
-matrix:
-  include:
-    - os: linux
-      compiler: gcc
-      env:
-        - COMPILER=gcc
-        - CONFIGURATION=debug
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "Z8w95EM21/5yrDm+W84vertGoUWITeZpqhwBq1bnmw3iNa+d3LNEquXSPRpS9bYC1Aqq4OogvHM9pdg/JBn35azz2ZDPj++Bah0tbfXVzo9iyAC+iaA7MR75FmHRWkEIiJVzpiycQLAPSu8ZAC8DNq+7RLQrPKiOI8GBuDyP6KUs9u/bptSyMWohP9214FbaylWgPKox1KoBQuyqaN4AQCKgQ54ADrbn4oMNdTlKy5pCd2AS1TwuPgoVaisxL3f98/8J4flxDnyrXcjC9Foipk0o6H8sMcBVOzCMM/FOm/MUNkeJra+TVOArJCQjlXVP9Tfi2ngWAF2hiBZnJRdQdOW4epJh5dvYYLdLN4pguRhXmQWEubJ8PcsA6ihB3CA214gQAonMC8rGzdml7S+3rr/+bTFMgoSbVDbi+CwLQUarAnETVdDn/OKixekkF0FPdTaAPDWHbcEEToKiU3WfHPzsRNeFmyMIMmDa6idUTxpGMeoYZz569AEFlUbZ63+/d/hK778gEIgTLCozDlijron708h1QBL90UI7B6F65n1IVpmN3twssutKxBr0lkHUtK/lloByoKEqqFi7b3DHarSeuWtM4q2ayd//SaNm7snsEChyMrTy26HxtpgL0iOVr2Xzmnd6+UF0c4hgMAKxoazS/RVryo9WetbhK6jJwNE="
 
-    - os: linux
-      compiler: gcc
-      env:
-        - COMPILER=gcc
-        - CONFIGURATION=release
-
-    - os: linux
-      compiler: clang
-      env:
-        - COMPILER=clang
-        - CONFIGURATION=debug
-      
-    - os: linux
-      compiler: clang
-      env:
-        - COMPILER=clang
-        - CONFIGURATION=release
+before_install:
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 script:
-  - ./build_and_run.sh $COMPILER $CONFIGURATION
+  - ./build_and_run.sh $CC $CONFIG
+
+# jobs need to be explicit so we don't overload coverity
+jobs:
+  include:
+    - compiler: gcc
+      env: CONFIG=debug
+    - compiler: gcc
+      env: CONFIG=release
+      if: branch != coverity_scan
+    - compiler: clang
+      env: CONFIG=debug
+      if: branch != coverity_scan
+    - compiler: clang
+      env: CONFIG=release
+      if: branch != coverity_scan
+    - compiler: gcc
+      env: CONFIG=debug GCOV=1
+      if: branch != coverity_scan
+    - compiler: gcc
+      env: CONFIG=release GCOV=1
+      if: branch != coverity_scan
+
+addons:
+  coverity_scan:
+    project:
+      name: "kudaba/simpletest_test"
+      description: "Unit tests for simpletest, a simple unit testing framework"
+    notification_email: chris@chrissavoie.com
+    build_command: "./build_and_run.sh clang debug"
+    branch_pattern: coverity_scan
