@@ -10,6 +10,9 @@
     <ClCompile Include="..\src\exampletests\exceptiontests.cpp">
       <Filter>exampletests</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\exampletests\executionordertests.cpp">
+      <Filter>exampletests</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\exampletests\failtests.cpp">
       <Filter>exampletests</Filter>
     </ClCompile>

@@ -63,6 +63,7 @@ ifeq ($(config),debug)
   OBJECTS += $(OBJDIR)/simpletest.o
   OBJECTS += $(OBJDIR)/basictests.o
   OBJECTS += $(OBJDIR)/exceptiontests.o
+  OBJECTS += $(OBJDIR)/executionordertests.o
   OBJECTS += $(OBJDIR)/failtests.o
   OBJECTS += $(OBJDIR)/memorytests.o
   OBJECTS += $(OBJDIR)/threadingtests.o
@@ -75,6 +76,7 @@ ifeq ($(config),release)
   OBJECTS += $(OBJDIR)/simpletest.o
   OBJECTS += $(OBJDIR)/basictests.o
   OBJECTS += $(OBJDIR)/exceptiontests.o
+  OBJECTS += $(OBJDIR)/executionordertests.o
   OBJECTS += $(OBJDIR)/failtests.o
   OBJECTS += $(OBJDIR)/memorytests.o
   OBJECTS += $(OBJDIR)/threadingtests.o
@@ -154,6 +156,11 @@ $(OBJDIR)/basictests.o: ../src/exampletests/basictests.cpp | $(OBJDIR)
 	$(SILENT) $(POSTFILECMDS)
 
 $(OBJDIR)/exceptiontests.o: ../src/exampletests/exceptiontests.cpp | $(OBJDIR)
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+	$(SILENT) $(POSTFILECMDS)
+
+$(OBJDIR)/executionordertests.o: ../src/exampletests/executionordertests.cpp | $(OBJDIR)
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 	$(SILENT) $(POSTFILECMDS)

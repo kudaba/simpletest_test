@@ -257,6 +257,7 @@
     <ClCompile Include="..\simpletest\simpletest.cpp" />
     <ClCompile Include="..\src\exampletests\basictests.cpp" />
     <ClCompile Include="..\src\exampletests\exceptiontests.cpp" />
+    <ClCompile Include="..\src\exampletests\executionordertests.cpp" />
     <ClCompile Include="..\src\exampletests\failtests.cpp" />
     <ClCompile Include="..\src\exampletests\memorytests.cpp" />
     <ClCompile Include="..\src\exampletests\threadingtests.cpp" />
