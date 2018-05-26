@@ -40,5 +40,6 @@ addons:
       name: "kudaba/simpletest_test"
       description: "Unit tests for simpletest, a simple unit testing framework"
     notification_email: chris@chrissavoie.com
-    build_command: "./build_and_run.sh clang debug"
+    build_command_prepend: "cov-configure --comptype gcc --template"
+    build_command: "./build_and_run.sh gcc debug"
     branch_pattern: coverity_scan
