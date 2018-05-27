@@ -3,6 +3,10 @@
 [![Build Status](https://travis-ci.org/kudaba/simpletest_test.svg?branch=master)](https://travis-ci.org/kudaba/simpletest_test)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/kudaba/simpletest_test?branch=master&svg=true)](https://ci.appveyor.com/project/kudaba/simpletest-test)
 [![codecov](https://codecov.io/gh/kudaba/simpletest_test/branch/master/graph/badge.svg)](https://codecov.io/gh/kudaba/simpletest_test)
+<a href="https://scan.coverity.com/projects/kudaba-simpletest_test">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/15803/badge.svg"/>
+</a>
 
 This repo functions as both the unit tests for simple tests and shows examples of different ways it can be customized to your needs. To add simpletest to your project you use the [simpletest](https://github.com/kudaba/simpletest) repo as a submodule and it only contains the minimum amount of files. I hope to eventually add a nuget package as well.
 
