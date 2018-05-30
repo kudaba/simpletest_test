@@ -5,7 +5,7 @@ env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "Z8w95EM21/5yrDm+W84vertGoUWITeZpqhwBq1bnmw3iNa+d3LNEquXSPRpS9bYC1Aqq4OogvHM9pdg/JBn35azz2ZDPj++Bah0tbfXVzo9iyAC+iaA7MR75FmHRWkEIiJVzpiycQLAPSu8ZAC8DNq+7RLQrPKiOI8GBuDyP6KUs9u/bptSyMWohP9214FbaylWgPKox1KoBQuyqaN4AQCKgQ54ADrbn4oMNdTlKy5pCd2AS1TwuPgoVaisxL3f98/8J4flxDnyrXcjC9Foipk0o6H8sMcBVOzCMM/FOm/MUNkeJra+TVOArJCQjlXVP9Tfi2ngWAF2hiBZnJRdQdOW4epJh5dvYYLdLN4pguRhXmQWEubJ8PcsA6ihB3CA214gQAonMC8rGzdml7S+3rr/+bTFMgoSbVDbi+CwLQUarAnETVdDn/OKixekkF0FPdTaAPDWHbcEEToKiU3WfHPzsRNeFmyMIMmDa6idUTxpGMeoYZz569AEFlUbZ63+/d/hK778gEIgTLCozDlijron708h1QBL90UI7B6F65n1IVpmN3twssutKxBr0lkHUtK/lloByoKEqqFi7b3DHarSeuWtM4q2ayd//SaNm7snsEChyMrTy26HxtpgL0iOVr2Xzmnd6+UF0c4hgMAKxoazS/RVryo9WetbhK6jJwNE="
+   - secure: "SZhJILSCc8C5Bty/S8u34roV0FpdLSCnaD01UFJh3RFh+9RhtHdTqoaEuYlvmJlAadCdfrCUAh6nBddv7Xfgr4yO+Ee5mnc180fW3xUBBzC1p2umtU7P8BeKlbHhxmkjYQ3YKE1W8ifyyZsjZxWEa3i/qNlXJMgdB0QqpnCopkG7BK2Y8tM0TK6F0yv36yn/a+IC3H8Gm/ojapTpECNbv67lPDEpyC/TWoNSir0OTPfsoD6ndCsJWfIJvpEJj/vxHuCP1LmxoS4US1xiEeglka4C4/pf3MfoJy68BSiKKT07LL/sEU/6G1NdcupVrfCOu3ng9MQqvGBIGR8634iAzaxcl9EO5PuglOUP99BlCpAXPoBLOH0KxkX1y02phM0HXhwDQVPKID3CMBhSi3TwE2Pw8E0t3tn5lRzgQh289PTJbOaycWJ9zp72qIA87TdN3uWJfbbOzBYWzV7S451uBr/1FfK6FcbHneZdKB6khdfiSVLtEILfV92JGCLgP1o7Nxv5UvQObcgZ7CFktciPvRCcP1RHiOq+kXPgiUg9QPbybc1soGovZOWiSfJbrfVzyy3GUZyAVw2QUo1Les/0D84nEsOMsb2msGxotipf4J/EVr6Ir/rA/7rdRpQJv4Hv+rsYtZv+mZwT0iwUsMJL/yArtecaiq5MJlQUBj0fEJc="
 
 before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
@@ -40,6 +40,5 @@ addons:
       name: "kudaba/simpletest_test"
       description: "Unit tests for simpletest, a simple unit testing framework"
     notification_email: chris@chrissavoie.com
-    build_command_prepend: "cov-configure --comptype gcc --template"
     build_command: "./build_and_run.sh gcc debug"
     branch_pattern: coverity_scan
